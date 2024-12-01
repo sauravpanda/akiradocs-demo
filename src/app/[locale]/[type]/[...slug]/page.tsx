@@ -57,6 +57,36 @@ export async function generateStaticParams() {
   return allSlugs;
 }
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const resolvedParams = await Promise.resolve(params);
+  const { locale, type, slug: slugArray } = resolvedParams;
+  
+  const slug = slugArray.length ? slugArray.join('/') : '';
+  const post = getContentBySlug(locale, type, slug);
+  const t = getTranslation(locale as 'en' | 'es' | 'fr');
+
+  return {
+    title: t(post?.title) || 'Documentation',
+    description: t(post?.description) || 'Documentation content',
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}/${type}/${slug}`,
+      languages: {
+        'en': `${process.env.NEXT_PUBLIC_SITE_URL}/en/${type}/${slug}`,
+        'es': `${process.env.NEXT_PUBLIC_SITE_URL}/es/${type}/${slug}`,
+        'fr': `${process.env.NEXT_PUBLIC_SITE_URL}/fr/${type}/${slug}`,
+      }
+    },
+    openGraph: {
+      title: t(post?.title) || 'Documentation',
+      description: t(post?.description) || 'Documentation content',
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}/${type}/${slug}`,
+      siteName: 'Your Site Name',
+      locale: locale,
+      type: 'article',
+    }
+  }
+}
+
 export default async function ContentPage({ params }: Props) {
   const resolvedParams = await Promise.resolve(params);
   const { locale, type, slug: slugArray } = resolvedParams;
