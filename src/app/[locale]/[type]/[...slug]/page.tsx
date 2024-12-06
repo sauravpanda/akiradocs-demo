@@ -19,7 +19,7 @@ import { ClientSideControls } from '@/components/layout/ClientSideControl';
 import { Metadata } from 'next'
 
 // Enable edge runtime
-export const runtime = 'edge';
+// export const runtime = 'edge';
 
 // Keep force-static to ensure pages are statically generated at build time
 export const dynamic = 'force-static';
