@@ -13,13 +13,15 @@ import { PageNavigation } from '@/components/layout/PageNavigation'
 import { MainTitle, SubTitle } from '@/components/blocks/HeadingBlock'
 import { SEO } from '@/components/layout/SEO'
 import { NotFound } from '@/components/layout/NotFound'
-import { TextToSpeech } from '@/components/tts/TextToSpeech'
 import { getAkiradocsConfig } from "@/lib/getAkiradocsConfig";
 import { getTranslation } from '@/lib/staticTranslation';
 import { ClientSideControls } from '@/components/layout/ClientSideControl';
 import { Metadata } from 'next'
 
-// export const runtime = 'edge'
+// Enable edge runtime
+export const runtime = 'edge';
+
+// Keep force-static to ensure pages are statically generated at build time
 export const dynamic = 'force-static';
 
 const PostContainer = ({ children }: { children: React.ReactNode }) => (
