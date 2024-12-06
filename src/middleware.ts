@@ -10,5 +10,5 @@ export function middleware(request: NextRequest) {
   return NextResponse.next()
 }
 
-// Enable edge runtime for middleware
-export const runtime = 'edge'; 
+// Use experimental-edge instead of edge
+export const runtime = 'experimental-edge'; 
