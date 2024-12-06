@@ -1,7 +1,8 @@
 {
   "site": {
     "title": "My Documentation",
-    "description": "Documentation powered by Akira Docs"
+    "description": "Documentation powered by Akira Docs",
+    "url": "https://akiradocs.com"
   },
   "branding": {
     "logo": {

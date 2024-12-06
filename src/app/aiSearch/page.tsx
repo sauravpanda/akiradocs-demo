@@ -12,9 +12,19 @@ import { getSearchConfig } from '@/lib/searchConfig'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { getAkiradocsConfig } from '@/lib/getAkiradocsConfig'
-import { ChatCompletionMessageParam, CreateMLCEngine } from "@mlc-ai/web-llm";
 import { Source } from '@/types/Source'
 import AILoader from '@/components/aiSearch/AILoader'
+
+type ChatCompletionMessageParam = {
+  role: string;
+  content: string;
+};
+
+declare global {
+  interface Window {
+    mlc: any;
+  }
+}
 
 export default function Home() {
   const [query, setQuery] = useState('')
@@ -65,6 +75,38 @@ export default function Home() {
     return { cleanResponse, sources };
   };
 
+  const loadMLCScript = async () => {
+    try {
+      // Only run this in the browser
+      if (typeof window !== 'undefined') {
+        // Create a script element
+        const script = document.createElement('script');
+        script.type = 'module';
+        
+        // Add the ESM import as inline script content
+        script.textContent = `
+          import * as webllm from "https://esm.run/@mlc-ai/web-llm";
+          window.mlc = webllm;
+        `;
+        
+        // Wait for the script to load
+        await new Promise((resolve, reject) => {
+          script.onload = resolve;
+          script.onerror = reject;
+          document.head.appendChild(script);
+        });
+
+        // Verify the script loaded
+        if (!window.mlc) {
+          throw new Error('MLC failed to initialize');
+        }
+      }
+    } catch (error) {
+      console.error('Failed to load WebLLM:', error);
+      throw new Error('Failed to initialize AI engine. Please try again later.');
+    }
+  };
+
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
@@ -72,7 +114,11 @@ export default function Home() {
     setSources([]) // Reset sources
     
     try {
-      // Updated fetch path to use absolute URL
+      // Load MLC script dynamically if not already loaded
+      if (!window.mlc) {
+        await loadMLCScript();
+      }
+
       const contextResponse = await fetch('/context/en_docs.txt');
       if (!contextResponse.ok) {
         throw new Error(`Failed to fetch context: ${contextResponse.status}`);
@@ -80,8 +126,8 @@ export default function Home() {
       const contextData = await contextResponse.text();
       const docsContext = contextData;
 
-      // Initialize MLC Engine
-      const engine = await CreateMLCEngine(
+      // Use the window.mlc global instead of the imported version
+      const engine = await window.mlc.CreateMLCEngine(
         "Llama-3.2-1B-Instruct-q4f16_1-MLC",
         { 
           initProgressCallback: (progress: any) => console.log(progress) 
