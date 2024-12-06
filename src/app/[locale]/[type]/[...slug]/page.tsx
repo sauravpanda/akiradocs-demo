@@ -13,7 +13,7 @@ import { PageNavigation } from '@/components/layout/PageNavigation'
 import { MainTitle, SubTitle } from '@/components/blocks/HeadingBlock'
 import { SEO } from '@/components/layout/SEO'
 import { NotFound } from '@/components/layout/NotFound'
-// import { TextToSpeech } from '@/components/tts/TextToSpeech'
+import { TextToSpeech } from '@/components/tts/TextToSpeech'
 import { getAkiradocsConfig } from "@/lib/getAkiradocsConfig";
 import { getTranslation } from '@/lib/staticTranslation';
 import { ClientSideControls } from '@/components/layout/ClientSideControl';
@@ -64,16 +64,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const slug = slugArray.length ? slugArray.join('/') : '';
   const post = getContentBySlug(locale, type, slug);
   const t = getTranslation(locale as 'en' | 'es' | 'fr');
+  const akiradocsConfig = getAkiradocsConfig();
 
   return {
     title: t(post?.title) || 'Documentation',
     description: t(post?.description) || 'Documentation content',
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}/${type}/${slug}`,
+      canonical: `${akiradocsConfig.site.url}/${locale}/${type}/${slug}`,
       languages: {
-        'en': `${process.env.NEXT_PUBLIC_SITE_URL}/en/${type}/${slug}`,
-        'es': `${process.env.NEXT_PUBLIC_SITE_URL}/es/${type}/${slug}`,
-        'fr': `${process.env.NEXT_PUBLIC_SITE_URL}/fr/${type}/${slug}`,
+        'en': `${akiradocsConfig.site.url}/en/${type}/${slug}`,
+        'es': `${akiradocsConfig.site.url}/es/${type}/${slug}`,
+        'fr': `${akiradocsConfig.site.url}/fr/${type}/${slug}`,
       }
     },
     openGraph: {
@@ -98,7 +99,6 @@ export default async function ContentPage({ params }: Props) {
   if (!post) {
     return <NotFound redirectUrl={`/${locale}/${type}`} />;
   }
-
   const akiradocsConfig = getAkiradocsConfig();
   const headerConfig = getHeaderConfig();
   const footerConfig = getFooterConfig();
@@ -140,7 +140,7 @@ export default async function ContentPage({ params }: Props) {
                     key={block.id} 
                     block={{
                       ...block,
-                      content: t(block.content)
+                      content: block.content
                     }} 
                   />
                 )
