@@ -51,11 +51,19 @@ const nextConfig = {
 
     return config;
   },
-  output: 'standalone',
+  output: 'export',
+  distDir: 'dist',
   images: {
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
   compress: true,
+  trailingSlash: true,
 };
 
 export default withBundleAnalyzer(nextConfig);

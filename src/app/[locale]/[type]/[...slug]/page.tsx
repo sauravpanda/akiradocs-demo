@@ -43,18 +43,68 @@ export async function generateStaticParams() {
   const types = ['docs', 'api', 'articles'];
   const allSlugs: { locale: string, type: string, slug: string[] }[] = [];
 
-  locales.forEach(locale => {
-    types.forEach(type => {
+  for (const locale of locales) {
+    for (const type of types) {
+      // Debug logging
+      console.log(`Checking content for ${locale}/${type}`);
+      
+      // Get navigation items first
       const navigationItems = getContentNavigation({}, locale, type);
-      if (Array.isArray(navigationItems)) {
-        navigationItems.forEach(item => {
-          if (item.slug) {
-            allSlugs.push({ locale, type, slug: item.slug.split('/') });
-          }
+      console.log(`Navigation items for ${locale}/${type}:`, navigationItems);
+
+      // Always include the introduction page if it exists
+      const introContent = getContentBySlug(locale, type, 'introduction');
+      console.log(`Introduction content exists for ${locale}/${type}:`, !!introContent);
+      
+      if (introContent) {
+        allSlugs.push({ 
+          locale, 
+          type, 
+          slug: ['introduction']
         });
       }
-    });
-  });
+
+      if (Array.isArray(navigationItems)) {
+        for (const item of navigationItems) {
+          if (item.slug) {
+            const slugArray = item.slug
+              .split('/')
+              .filter(Boolean)
+              .map((segment: string) => segment.trim())
+              .filter((segment: string) => segment.length > 0);
+            
+            if (slugArray.length > 0) {
+              const fullSlug = slugArray.join('/');
+              const pageContent = getContentBySlug(locale, type, fullSlug);
+              console.log(`Content exists for ${locale}/${type}/${fullSlug}:`, !!pageContent);
+              
+              if (pageContent) {
+                allSlugs.push({ 
+                  locale, 
+                  type, 
+                  slug: slugArray 
+                });
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  console.log('Final generated paths:', allSlugs);
+  
+  // Ensure we always have at least one path
+  if (allSlugs.length === 0) {
+    console.log('No content found, adding default path');
+    return [
+      { 
+        locale: 'en', 
+        type: 'docs', 
+        slug: ['introduction']
+      }
+    ];
+  }
 
   return allSlugs;
 }
@@ -95,7 +145,10 @@ export default async function ContentPage({ params }: Props) {
   const { locale, type, slug: slugArray } = resolvedParams;
   const t = getTranslation(locale as 'en' | 'es' | 'de');
   
-  const slug = slugArray.length ? slugArray.join('/') : '';
+  const slug = slugArray
+    .filter(Boolean)
+    .join('/');
+
   const post = getContentBySlug(locale, type, slug);
 
   if (!post) {
@@ -108,7 +161,12 @@ export default async function ContentPage({ params }: Props) {
   const { prev, next } = getNextPrevPages(navigationItems, `/${type}/${slug}`);
   const pageTitle = t(post.title) || t('common.documentation');
   const pageDescription = t(post.description) || t('common.documentationContent');
-  const canonicalUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}/${type}/${slug}`;
+  const canonicalUrl = [
+    process.env.NEXT_PUBLIC_SITE_URL,
+    locale,
+    type,
+    slug
+  ].filter(Boolean).join('/');
 
   return (
     <div className="flex flex-col min-h-screen">
