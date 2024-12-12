@@ -11,7 +11,18 @@ type Props = {
 }
 
 export const dynamic = 'force-static';
-
+function formatRedirectUrl(locale: string, type: string, slug: string): string {
+  // Remove leading/trailing slashes
+  const cleanSlug = slug.replace(/^\/+|\/+$/g, '');
+  
+  // Check if slug already contains locale and/or type
+  const parts = cleanSlug.split('/');
+  const slugWithoutLocaleAndType = parts
+    .filter(part => part !== locale && part !== type)
+    .join('/');
+  
+  return `/${locale}/${type}/${slugWithoutLocaleAndType}`;
+}
 export async function generateStaticParams() {
   const locales = ['en', 'es', 'fr']; 
   const types = ['docs', 'api', 'articles'];
@@ -50,10 +61,10 @@ export default async function Page({ params }: Props) {
   const { locale, type } = resolvedParams;
   
   // Get the first/default content for this type
-  const recentContent = getRecentContent(`${locale}/${type}`);
+  const recentContent = await getRecentContent(`${locale}/${type}`);
   
   if (recentContent) {
-    const redirectUrl = `/${locale}/${type}/${recentContent.slug.replace(`${type}/`, '')}`;
+    const redirectUrl = formatRedirectUrl(locale, type, recentContent.slug);
     redirect(redirectUrl);
   }
 
