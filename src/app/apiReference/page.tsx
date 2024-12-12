@@ -14,7 +14,7 @@ import { getFooterConfig } from '@/lib/footerConfig';
 import { getHeaderConfig } from '@/lib/headerConfig';
 import { ApiSidebar } from '@/components/layout/Navigation';
 
-
+export const runtime = 'edge';
 interface EndpointSectionProps {
   id: string;
   method: string;
