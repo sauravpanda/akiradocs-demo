@@ -1,6 +1,6 @@
 {
   "name": "akiradocs",
-  "version": "1.0.41",
+  "version": "1.0.52",
   "private": true,
   "scripts": {
     "translate": "npm run compile && node scripts/translate.js",
@@ -10,8 +10,8 @@
     "build": "npm run compile && npm run generate-sitemap && set NEXT_PUBLIC_AKIRADOCS_EDIT_MODE=false && next build",
     "start": "set NEXT_PUBLIC_AKIRADOCS_EDIT_MODE=false && next start",
     "lint": "next lint",
+    "migrate-gitbook": "node scripts/migrations/gitbook.js",
     "generate-manifest": "node scripts/generate-manifest.js"
-
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^1.0.1",
@@ -23,6 +23,7 @@
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
     "@million/lint": "^1.0.12",
+    "@mlc-ai/web-llm": "^0.2.76",
     "@next/mdx": "^15.0.1",
     "@radix-ui/react-accordion": "^1.2.1",
     "@radix-ui/react-avatar": "^1.1.1",
@@ -67,7 +68,6 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^15.0.3",
     "@tailwindcss/typography": "^0.5.15",
     "@types/glob": "^8.1.0",
     "@types/node": "^20.17.0",

@@ -13,9 +13,9 @@ import { ErrorBoundary } from 'react-error-boundary'
 import { getApiNavigation } from '@/lib/content';
 import { useAnalytics } from '@/hooks/useAnalytics';
 const buttonStyles = {
-  base: "w-full justify-start text-left font-normal rounded-lg transition-colors px-3 py-2",
+  base: "w-full justify-start text-left font-normal rounded-lg transition-all px-3 py-2 whitespace-normal",
   hover: "hover:bg-accent/40 hover:text-accent-foreground",
-  active: "bg-accent text-accent-foreground font-medium",
+  active: "bg-gradient-to-r from-accent to-accent/80 text-accent-foreground font-medium shadow-md translate-x-1",
   state: "data-[state=open]:bg-accent/30",
 }
 
@@ -33,9 +33,9 @@ export function Navigation({ locale, items }: NavigationProps) {
   
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <aside className="w-64 bg-sidebar-background/50 text-sidebar-foreground border-r border-border/40 h-[calc(100vh-4rem)] sticky top-16 backdrop-blur-sm">
-        <ScrollArea className="h-full py-4">
-          <nav className="px-3 space-y-1">
+      <aside className="w-64 bg-sidebar-background/50 text-sidebar-foreground border-r border-border/40 h-[calc(100vh-4rem)] sticky top-16 backdrop-blur-sm overflow-hidden">
+        <ScrollArea className="h-full py-6 px-4">
+          <nav className="space-y-2">
             {Object.entries(items)
               .filter(([key]) => key !== "defaultRoute")
               .map(([key, item]) => (
@@ -54,6 +54,22 @@ const NavItem = React.memo(({ locale, item, pathname, depth = 0 }: NavItemProps)
   const isActive = item.path ? pathname === `/${locale}${item.path}` : false
   const absolutePath = item.path ? `/${locale}${item.path}` : '#'
   const { track } = useAnalytics()
+  const itemRef = React.useRef<HTMLDivElement>(null)
+
+  React.useEffect(() => {
+    if (isActive && itemRef.current) {
+      setTimeout(() => {
+        const viewport = itemRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement;
+        if (viewport) {
+          const itemRect = itemRef.current?.getBoundingClientRect();
+          const viewportRect = viewport.getBoundingClientRect();
+          const scrollOffset = (itemRect?.top ?? 0) - (viewportRect.top ?? 0) - (viewportRect.height / 2) + ((itemRect?.height ?? 0) / 2);
+          
+          viewport.scrollTop += scrollOffset;
+        }
+      }, 100);
+    }
+  }, [isActive]);
 
   const handleClick = useCallback((e: React.MouseEvent) => {
     track('navigation_click', {
@@ -70,6 +86,7 @@ const NavItem = React.memo(({ locale, item, pathname, depth = 0 }: NavItemProps)
 
   return (
     <motion.div 
+      ref={itemRef}
       className={cn(
         "relative",
         depth > 0 && "ml-3 border-l border-border/50 pl-3 before:absolute before:left-0 before:top-0 before:bottom-0 before:w-px before:bg-gradient-to-b before:from-border/0 before:via-border/50 before:to-border/0"
@@ -101,14 +118,14 @@ const NavItem = React.memo(({ locale, item, pathname, depth = 0 }: NavItemProps)
           </motion.div>
         ) : ""}
         {item.path ? (
-          <Link href={absolutePath} className="flex-1" onClick={handleClick}>
+          <Link href={absolutePath} className="flex-1 break-words" onClick={handleClick}>
             {item.title}
           </Link>
         ) : (
-          <span className="flex-1">{item.title}</span>
+          <span className="flex-1 break-words">{item.title}</span>
         )}
         {item.badge && (
-          <span className="ml-2 px-2 py-0.5 text-xs rounded-full bg-accent text-accent-foreground">
+          <span className="ml-2 px-2 py-0.5 text-xs rounded-full bg-accent text-accent-foreground shrink-0">
             {item.badge}
           </span>
         )}
@@ -140,7 +157,7 @@ export async function ApiSidebar() {
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <aside className="w-64 bg-sidebar-background text-sidebar-foreground border-r h-[calc(100vh-4rem)] sticky top-16 shadow-sm">
         <ScrollArea className="h-full py-6 px-4">
-          <nav>
+          <nav className="space-y-2">
             {navigation.map((item, index) => (
               <ApiNavItem key={index} item={item} />
             ))}

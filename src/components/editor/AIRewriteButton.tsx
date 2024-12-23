@@ -131,14 +131,88 @@ const blockStyles = {
       prompt: 'Expand the toggle content with more detailed explanations. Keep the toggle structure. Output only the toggle content.'
     }
   ],
-  
+
+  table: [
+    {
+      value: 'simplify',
+      label: 'Simplify',
+      prompt: 'Rewrite this table to simplify its content and structure. Output only the table data in a simplified format.'
+    },
+    {
+      value: 'detailed',
+      label: 'Detailed',
+      prompt: 'Rewrite this table to add more detailed information and context. Output only the table data with added details.'
+    }
+  ],
+  video: [
+    {
+      value: 'descriptive',
+      label: 'Descriptive',
+      prompt: 'Rewrite the video caption to be more descriptive and engaging.'
+    },
+    {
+      value: 'concise',
+      label: 'Concise',
+      prompt: 'Rewrite the video caption to be more concise and clear.'
+    }
+  ],
+  audio: [
+    {
+      value: 'descriptive',
+      label: 'Descriptive',
+      prompt: 'Rewrite the audio caption to be more descriptive and engaging.'
+    },
+    {
+      value: 'concise',
+      label: 'Concise',
+      prompt: 'Rewrite the audio caption to be more concise and clear.'
+    }
+  ],
+  file: [
+    {
+      value: 'descriptive',
+      label: 'Descriptive',
+      prompt: 'Rewrite the file caption to be more descriptive and engaging.'
+    }
+  ],
+  checkList: [
+    {
+      value: 'descriptive',
+      label: 'Descriptive',
+      prompt: 'Rewrite the checklist to be more descriptive and engaging.'
+    },
+    {
+      value: 'concise',
+      label: 'Concise',
+      prompt: 'Rewrite the checklist to be more concise and clear.'
+    }
+  ],
   apiReference: [
+    {
+      value: 'descriptive',
+      label: 'Descriptive',
+      prompt: 'Rewrite the API reference to be more descriptive and engaging.'
+    }
+  ],
+  button: [
+    {
+      value: 'descriptive',
+      label: 'Descriptive',
+      prompt: 'Rewrite the button text to be more descriptive and engaging.'
+    },
+    {
+      value: 'concise',
+      label: 'Concise',
+      prompt: 'Rewrite the button text to be more concise and clear.'
+    }
+  ],
+  spacer: [
     {
       value: 'default',
       label: 'Default',
-      prompt: 'No rewriting options available for API reference'
+      prompt: 'No rewriting options available for spacer'
     }
-  ],
+  ]
 } as const;
 
 interface AIRewriteButtonProps {
@@ -158,6 +232,10 @@ export function AIRewriteButton({ onRewrite, blockType, isRewriting }: AIRewrite
   };
 
   const handleRewrite = async () => {
+    if (blockType === 'spacer') {
+      return;
+    }
+
     try {
       await onRewrite(style)
     } catch (error) {
@@ -167,6 +245,10 @@ export function AIRewriteButton({ onRewrite, blockType, isRewriting }: AIRewrite
         toast.error('Failed to rewrite content')
       }
     }
+  }
+
+  if (blockType === 'spacer') {
+    return null;
   }
 
   return (

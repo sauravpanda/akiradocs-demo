@@ -35,6 +35,12 @@ interface SortableBlockProps {
       align?: 'left' | 'center' | 'right'
       type?: 'info' | 'warning' | 'success' | 'error'
       title?: string
+      buttonUrl?: string
+      buttonStyle?: {
+        variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link'
+        size?: 'default' | 'sm' | 'lg'
+        radius?: 'none' | 'sm' | 'md' | 'lg' | 'full'
+      }
     }
   }
   updateBlock: (id: string, content: string) => void
@@ -55,6 +61,11 @@ interface ImageBlockContent {
   size?: 'small' | 'medium' | 'large' | 'full'
 }
 
+interface AudioBlockContent {
+  url: string;
+  caption?: string;
+  alignment?: 'left' | 'center' | 'right';
+}
 
 export function SortableBlock({
   block,
@@ -195,6 +206,74 @@ export function SortableBlock({
 
   const [isRewriting, setIsRewriting] = useState(false)
 
+  const getVideoContent = () => {
+    if (!block.content) {
+      return {
+        url: '',
+        caption: '',
+        alignment: 'center',
+        size: 'medium'
+      }
+    }
+
+    try {
+      return typeof block.content === 'string' 
+        ? JSON.parse(block.content)
+        : block.content
+    } catch {
+      return {
+        url: block.content,
+        caption: '',
+        alignment: 'center',
+        size: 'medium'
+      }
+    }
+  }
+
+  const getAudioContent = () => {
+    if (!block.content) {
+      return {
+        url: '',
+        caption: '',
+        alignment: 'center'
+      }
+    }
+
+    try {
+      return typeof block.content === 'string' 
+        ? JSON.parse(block.content)
+        : block.content;
+    } catch {
+      return {
+        url: block.content,
+        caption: '',
+        alignment: 'center'
+      };
+    }
+  }
+
+  const getFileContent = () => {
+    if (!block.content) {
+      return {
+        url: '',
+        name: '',
+        fileType: ''
+      }
+    }
+
+    try {
+      return typeof block.content === 'string' 
+        ? JSON.parse(block.content)
+        : block.content
+    } catch {
+      return {
+        url: block.content,
+        name: '',
+        fileType: ''
+      }
+    }
+  }
+
   return showPreview ? (
     <BlockRenderer block={block} />
   ) : (
@@ -267,7 +346,15 @@ export function SortableBlock({
             <BlockFormatToolbar
               isVisible={isFocused}
               styles={block.metadata?.styles}
-              align={block.type === 'image' ? getImageContent().alignment : block.metadata?.align}
+              align={
+                block.type === 'image' 
+                  ? getImageContent().alignment 
+                  : block.type === 'video'
+                  ? getVideoContent().alignment
+                  : block.type === 'audio'
+                  ? getAudioContent().alignment
+                  : block.metadata?.align
+              }
               level={block.metadata?.level || 1}
               showLevelSelect={block.type === 'heading'}
               listType={block.metadata?.listType || 'unordered'}
@@ -287,8 +374,22 @@ export function SortableBlock({
                   const currentContent = getImageContent();
                   const updatedContent = {
                     ...currentContent,
-                    alignment: newAlign,  // For the image container alignment
-                    position: newAlign,   // For the image position within container
+                    alignment: newAlign,
+                    position: newAlign,
+                  };
+                  updateBlock(block.id, JSON.stringify(updatedContent));
+                } else if (block.type === 'video') {
+                  const currentContent = getVideoContent();
+                  const updatedContent = {
+                    ...currentContent,
+                    alignment: newAlign,
+                  };
+                  updateBlock(block.id, JSON.stringify(updatedContent));
+                } else if (block.type === 'audio') {
+                  const currentContent = getAudioContent();
+                  const updatedContent = {
+                    ...currentContent,
+                    alignment: newAlign,
                   };
                   updateBlock(block.id, JSON.stringify(updatedContent));
                 } else {
@@ -368,6 +469,72 @@ export function SortableBlock({
                 }
               }}
               isAiRewriting={isRewriting}
+              showVideoControls={block.type === 'video'}
+              videoContent={block.type === 'video' ? (() => {
+                try {
+                  return typeof block.content === 'string' 
+                    ? JSON.parse(block.content)
+                    : block.content;
+                } catch {
+                  return {
+                    url: block.content,
+                    caption: '',
+                    alignment: 'center',
+                    size: 'medium'
+                  };
+                }
+              })() : undefined}
+              onVideoMetadataChange={(metadata) => {
+                if (block.type === 'video') {
+                  const currentContent = (() => {
+                    try {
+                      return typeof block.content === 'string'
+                        ? JSON.parse(block.content)
+                        : block.content;
+                    } catch {
+                      return {
+                        url: block.content,
+                        caption: '',
+                        alignment: 'center',
+                        size: 'medium'
+                      };
+                    }
+                  })();
+                  
+                  const updatedContent = {
+                    ...currentContent,
+                    ...metadata
+                  };
+                  updateBlock(block.id, JSON.stringify(updatedContent));
+                }
+              }}
+              showAudioControls={block.type === 'audio'}
+              audioContent={block.type === 'audio' ? getAudioContent() : undefined}
+              onAudioMetadataChange={(metadata) => {
+                if (block.type === 'audio') {
+                  const currentContent = getAudioContent();
+                  const updatedContent = {
+                    ...currentContent,
+                    ...metadata
+                  };
+                  updateBlock(block.id, JSON.stringify(updatedContent));
+                }
+              }}
+              showButtonControls={block.type === 'button'}
+              buttonMetadata={{
+                url: block.metadata?.buttonUrl,
+                style: block.metadata?.buttonStyle
+              }}
+              onButtonMetadataChange={(metadata) => {
+                updateBlockMetadata(block.id, {
+                  ...block.metadata,
+                  buttonUrl: metadata.buttonUrl,
+                  buttonStyle: {
+                    ...block.metadata?.buttonStyle,
+                    ...metadata.buttonStyle
+                  }
+                })
+              }}
             />
           )}
           <BlockRenderer 

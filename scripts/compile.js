@@ -95,11 +95,32 @@ async function convertMarkdownToBlocks(content) {
       continue;
     }
 
+    if (line.trim() === '***') {
+      if (currentBlock.length > 0) {
+        blocks.push({
+          id: String(blockId++),
+          type: 'paragraph',
+          content: currentBlock.join('\n').trim()
+        });
+        currentBlock = [];
+      }
+
+      blocks.push({
+        id: String(blockId++),
+        type: 'divider',
+        content: ''
+      });
+      continue;
+    }
+
     if (line.startsWith('#')) {
       if (!firstHeadingFound) {
         const match = line.match(/^#+\s*(.*)/);
         if (match) {
           title = match[1].trim();
+          if (title.includes('**')) {
+            title = `<strong>${title.replace(/\*\*/g, '')}</strong>`;
+          }
           firstHeadingFound = true;
           skipNextLine = true;
           continue;
@@ -119,10 +140,16 @@ async function convertMarkdownToBlocks(content) {
       if (!match) continue;
       
       const level = match[0].length;
+      let content = line.slice(level).trim();
+      
+      if (content.includes('**')) {
+        content = `<strong>${content.replace(/\*\*/g, '')}</strong>`;
+      }
+
       blocks.push({
         id: String(blockId++),
         type: 'heading',
-        content: line.slice(level).trim(),
+        content: content,
         metadata: { level }
       });
 
@@ -215,12 +242,15 @@ async function updateMetaFile(folderPath, newFile) {
       .split('_')
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
+    
+    const pathWithoutLang = relativePath.split(path.sep).slice(1).join(path.sep);
     meta[fileName] = {
       title: compiledContent.title || humanReadableFileName,
-      path: path.join('/', relativePath, fileName)
+      path: path.join('/', pathWithoutLang, fileName)
     };
   } else {
-    meta[fileName].path = path.join('/', relativePath, fileName);
+    const pathWithoutLang = relativePath.split(path.sep).slice(1).join(path.sep);
+    meta[fileName].path = path.join('/', pathWithoutLang, fileName);
   }
 
   await writeFile(metaPath, JSON.stringify(meta, null, 2));
@@ -254,7 +284,7 @@ async function compileMarkdownFiles() {
       await mkdir(path.dirname(compiledPath), { recursive: true });
       await writeFile(compiledPath, JSON.stringify(compiledContent, null, 2));
       
-      await updateMetaFile(path.dirname(compiledPath), compiledPath);
+      // await updateMetaFile(path.dirname(compiledPath), compiledPath);
       
       console.log(`Compiled ${file} -> ${compiledPath}`);
     }
@@ -277,84 +307,89 @@ async function createMetaFilesForAllFolders() {
         const sectionPath = path.join(langPath, section);
         if (!existsSync(sectionPath)) continue;
 
+        // Read existing meta file and preserve its structure
         let existingMeta = {};
         const metaPath = path.join(sectionPath, '_meta.json');
-        let existingDefaultRoute;
-
+        
         if (existsSync(metaPath)) {
-          existingMeta = JSON.parse(await readFile(metaPath, 'utf-8'));
-          existingDefaultRoute = existingMeta.defaultRoute;
+          const metaContent = await readFile(metaPath, 'utf-8');
+          try {
+            existingMeta = JSON.parse(metaContent);
+          } catch (e) {
+            console.warn(`Warning: Invalid JSON in ${metaPath}`);
+          }
         }
 
+        // Initialize meta with existing structure
+        const meta = {
+          defaultRoute: existingMeta.defaultRoute || (section === 'docs' ? '/docs/introduction' : '/articles/welcome'),
+          ...existingMeta
+        };
+
+        // Get all JSON files except _meta.json
         const jsonFiles = await glob('**/*.json', { 
           cwd: sectionPath,
-          ignore: '**/_meta.json'
+          ignore: ['**/_meta.json']
         });
 
-        const meta = {
-          defaultRoute: existingDefaultRoute || (section === 'docs' ? '/docs/introduction' : '/articles/welcome')
-        };
-        
+        // Process each file and update the structure
         for (const jsonFile of jsonFiles) {
           const fileName = path.basename(jsonFile, '.json');
           const filePath = path.join(sectionPath, jsonFile);
           const content = JSON.parse(await readFile(filePath, 'utf-8'));
-          const dirs = path.dirname(jsonFile).split('/').filter(d => d !== '.');
+          const dirs = path.dirname(jsonFile).split(path.sep).filter(d => d !== '.');
           
-          const fileKey = fileName.replace(/-/g, ' ')
-            .split(' ')
-            .map((word, index) => {
-              const capitalized = word.charAt(0).toUpperCase() + word.slice(1);
-              return index === 0 ? capitalized.toLowerCase() : capitalized;
-            })
-            .join('');
-
+          // Create nested structure while preserving existing data
           let current = meta;
-          
-          if (dirs.length > 0) {
-            for (const dir of dirs) {
-              const dirKey = dir.replace(/-/g, ' ')
-                .split(' ')
-                .map((word, index) => {
-                  const capitalized = word.charAt(0).toUpperCase() + word.slice(1);
-                  return index === 0 ? capitalized.toLowerCase() : capitalized;
-                })
-                .join('');
-
-              if (!current[dirKey]) {
-                current[dirKey] = {
-                  title: dir.split('_')
-                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(' '),
-                  items: {}
-                };
-              }
-              current = current[dirKey].items;
+          for (const dir of dirs) {
+            const dirKey = formatKey(dir);
+            if (!current[dirKey]) {
+              current[dirKey] = {
+                title: formatTitle(dir),
+                items: {}
+              };
+            } else if (!current[dirKey].items) {
+              current[dirKey].items = {};
             }
+            current = current[dirKey].items;
           }
 
+          const fileKey = formatKey(fileName);
           const existingEntry = findExistingEntry(existingMeta, dirs, fileKey);
-          const title = existingEntry?.title || content.title || fileName.split('_')
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' ');
-
+          
           current[fileKey] = {
-            title,
+            ...existingEntry, // Preserve existing metadata
+            title: existingEntry?.title || content.title || formatTitle(fileName),
             path: `/${section}/${jsonFile.replace('.json', '')}`
           };
         }
 
-        const metaDataPath = path.join(sectionPath, '_meta.json');
-        if (!existsSync(metaDataPath)) {
-          await writeFile(metaDataPath, JSON.stringify(meta, null, 2));
-          console.log(`Created meta file: ${metaDataPath}`);
-        }
+        await writeFile(metaPath, JSON.stringify(meta, null, 2));
+        console.log(`Created/Updated meta file: ${metaPath}`);
       }
     }
   } catch (error) {
     console.error('Error creating meta files:', error);
     process.exit(1);
   }
+}
+
+// Helper function to format keys consistently
+function formatKey(str) {
+  return str.replace(/-/g, ' ')
+    .split(' ')
+    .map((word, index) => {
+      const capitalized = word.charAt(0).toUpperCase() + word.slice(1);
+      return index === 0 ? capitalized.toLowerCase() : capitalized;
+    })
+    .join('');
+}
+
+// Helper function to format titles consistently
+function formatTitle(str) {
+  return str.split(/[_-]/)
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
 }
 
 function findExistingEntry(meta, dirs, fileKey) {
