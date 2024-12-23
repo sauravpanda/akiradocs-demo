@@ -12,19 +12,11 @@ import { getSearchConfig } from '@/lib/searchConfig'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { getAkiradocsConfig } from '@/lib/getAkiradocsConfig'
+import { ChatCompletionMessageParam, CreateMLCEngine } from "@mlc-ai/web-llm";
 import { Source } from '@/types/Source'
 import AILoader from '@/components/aiSearch/AILoader'
-
-type ChatCompletionMessageParam = {
-  role: string;
-  content: string;
-};
-
-declare global {
-  interface Window {
-    mlc: any;
-  }
-}
+import { getHeaderConfig } from '@/lib/headerConfig'
+import { Header } from '@/components/layout/Header'
 
 export default function Home() {
   const [query, setQuery] = useState('')
@@ -33,6 +25,7 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null)
   const recommendedArticles = getRecommendedArticles()
   const searchConfig = getSearchConfig()
+  const headerConfig = getHeaderConfig()
   const config = getAkiradocsConfig()
   const [sources, setSources] = useState<Source[]>([])
 
@@ -75,50 +68,13 @@ export default function Home() {
     return { cleanResponse, sources };
   };
 
-  const loadMLCScript = async () => {
-    try {
-      // Only run this in the browser
-      if (typeof window !== 'undefined') {
-        // Create a script element
-        const script = document.createElement('script');
-        script.type = 'module';
-        
-        // Add the ESM import as inline script content
-        script.textContent = `
-          import * as webllm from "https://esm.run/@mlc-ai/web-llm";
-          window.mlc = webllm;
-        `;
-        
-        // Wait for the script to load
-        await new Promise((resolve, reject) => {
-          script.onload = resolve;
-          script.onerror = reject;
-          document.head.appendChild(script);
-        });
-
-        // Verify the script loaded
-        if (!window.mlc) {
-          throw new Error('MLC failed to initialize');
-        }
-      }
-    } catch (error) {
-      console.error('Failed to load WebLLM:', error);
-      throw new Error('Failed to initialize AI engine. Please try again later.');
-    }
-  };
-
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
     setError(null)
-    setSources([]) // Reset sources
+    setSources([])
     
     try {
-      // Load MLC script dynamically if not already loaded
-      if (!window.mlc) {
-        await loadMLCScript();
-      }
-
       const contextResponse = await fetch('/context/en_docs.txt');
       if (!contextResponse.ok) {
         throw new Error(`Failed to fetch context: ${contextResponse.status}`);
@@ -126,15 +82,15 @@ export default function Home() {
       const contextData = await contextResponse.text();
       const docsContext = contextData;
 
-      // Use the window.mlc global instead of the imported version
-      const engine = await window.mlc.CreateMLCEngine(
+      const engine = await CreateMLCEngine(
         "Llama-3.2-1B-Instruct-q4f16_1-MLC",
-        { 
-          initProgressCallback: (progress: any) => console.log(progress) 
+        { initProgressCallback: (progress: any) => console.log(progress)
+        },
+        {
+          context_window_size: 100000,
         }
       );
 
-      // Prepare messages for the chat with context
       const messages = [
         { 
           role: "system", 
@@ -166,15 +122,24 @@ export default function Home() {
         }
       ];
 
-      console.log(messages)
+      console.log("messages", messages)
 
-      // Get response from MLC chatbot
-      const reply = await engine.chat.completions.create({ messages: messages as ChatCompletionMessageParam[] });
-      const aiContent = reply.choices[0].message.content || '';
+      const chunks = await engine.chat.completions.create({ 
+        messages: messages as ChatCompletionMessageParam[],
+        stream: true,
+        stream_options: { include_usage: true }
+      });
+
+      let aiContent = "";
+      for await (const chunk of chunks) {
+        const newContent = chunk.choices[0]?.delta.content || "";
+        aiContent += newContent;
+        // Update the response in real-time
+        setAiResponse(aiContent);
+      }
       
-      // Extract sources and clean response
+      // Extract sources after the full response is received
       const { cleanResponse, sources } = extractSources(aiContent);
-      
       setAiResponse(cleanResponse);
       setSources(sources);
       
@@ -198,7 +163,10 @@ export default function Home() {
   }
 
   return (
+    <div className="flex flex-col min-h-screen">
+      <Header {...headerConfig} currentLocale={`en`} currentType={`aiSearch`}/>
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+      
       <div className="max-w-4xl mx-auto">
         <SearchHeader 
           logo={searchConfig.logo}
@@ -238,6 +206,7 @@ export default function Home() {
           )}
         </AnimatePresence>
       </div>
+    </div>
     </div>
   )
 }

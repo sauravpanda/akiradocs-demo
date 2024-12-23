@@ -17,7 +17,7 @@ export function TableOfContents({ publishDate, modifiedDate, author, locale }: T
   const t = getTranslation(locale as keyof typeof locales);
 
   useEffect(() => {
-    const elements = Array.from(document.querySelectorAll('h2:not([data-toc-ignore]), h3:not([data-toc-ignore]), h4:not([data-toc-ignore])'));
+    const elements = Array.from(document.querySelectorAll('h2:not([data-toc-ignore]), h3:not([data-toc-ignore]), h4:not([data-toc-ignore]), h5:not([data-toc-ignore])'));
     setHeadings(elements as HTMLHeadingElement[]);
 
     const observer = new IntersectionObserver(
@@ -57,11 +57,11 @@ export function TableOfContents({ publishDate, modifiedDate, author, locale }: T
 
   return (
     <div className="w-64 border-l border-border sticky top-16 h-[calc(100vh-4rem)] hidden xl:block">
-      <ScrollArea className="h-full py-2 px-4">
-        <nav>
+      <ScrollArea className="h-full py-6 px-4">
+        <nav className="space-y-2">
           {(author || modifiedDate) && (
             <>
-              <div className="mb-4 text-sm">
+              <div className="mb-6">
                 {author && author !== 'Anonymous' && (
                   <div className="flex items-center gap-2 mb-2 p-2.5 rounded-lg bg-muted/30 backdrop-blur-sm">
                     <div className="h-7 w-7 rounded-full bg-primary/10 flex items-center justify-center">
@@ -104,21 +104,37 @@ export function TableOfContents({ publishDate, modifiedDate, author, locale }: T
             {t('common.labels.onThisPage')}
           </h4>
 
-          <ul className="space-y-2 ml-1">
+          <ul className="space-y-2">
             {headings.map((heading) => {
-              const level = parseInt(heading.tagName[1]) - 2;
+              const level = parseInt(heading.tagName[1]) - 1;
+              const indentClass = {
+                0: '',
+                1: 'ml-3',  // h2
+                2: 'ml-6', // h3
+                3: 'ml-9', // h4
+                4: 'ml-12', // h5
+                5: 'ml-15', // h6
+              }[level] || '';
+
+              // console.log(heading.textContent, level, indentClass);
               return (
                 <li key={heading.id}>
                   <a
                     href={`#${heading.id}`}
                     onClick={(e) => handleClick(e, heading.id)}
                     className={`
-                      text-sm block py-1.5 transition-colors duration-200 rounded-md
-                      ${level > 0 ? 'pl-' + (level * 4) : ''}
+                      text-sm block px-3 py-2 rounded-md
+                      ${indentClass}
+                      transition-all duration-200 ease-in-out
+                      relative
+                      before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 
+                      before:h-4 before:w-0.5 before:bg-primary before:opacity-0
+                      before:transition-all before:duration-200
+                      hover:before:opacity-100
                       ${
                         activeId === heading.id
-                          ? 'text-primary font-medium bg-primary/5'
-                          : 'text-muted-foreground hover:text-foreground hover:bg-muted/40'
+                          ? 'text-primary font-medium bg-primary/5 before:opacity-100'
+                          : 'text-muted-foreground hover:text-foreground hover:bg-muted/40 hover:translate-x-1'
                       }
                     `}
                   >

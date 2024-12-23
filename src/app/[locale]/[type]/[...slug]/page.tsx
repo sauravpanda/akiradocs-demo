@@ -18,10 +18,7 @@ import { getTranslation } from '@/lib/staticTranslation';
 import { ClientSideControls } from '@/components/layout/ClientSideControl';
 import { Metadata } from 'next'
 
-// Enable edge runtime
-export const runtime = 'edge';
-
-// Keep force-static to ensure pages are statically generated at build time
+export const runtime = 'edge'
 // export const dynamic = 'force-static';
 
 const PostContainer = ({ children }: { children: React.ReactNode }) => (
@@ -38,6 +35,26 @@ type Props = {
   }>;
 }
 
+// export async function generateStaticParams() {
+//   const locales = ['en', 'es', 'fr']; 
+//   const types = ['docs', 'api', 'articles'];
+//   const allSlugs: { locale: string, type: string, slug: string[] }[] = [];
+
+//   locales.forEach(locale => {
+//     types.forEach(type => {
+//       const navigationItems = getContentNavigation({}, locale, type);
+//       if (Array.isArray(navigationItems)) {
+//         navigationItems.forEach(item => {
+//           if (item.slug) {
+//             allSlugs.push({ locale, type, slug: item.slug.split('/') });
+//           }
+//         });
+//       }
+//     });
+//   });
+
+//   return allSlugs;
+// }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await Promise.resolve(params);
@@ -77,7 +94,6 @@ export default async function ContentPage({ params }: Props) {
   
   const slug = slugArray.length ? slugArray.join('/') : '';
   const post = await getContentBySlug(locale, type, slug);
-
   if (!post) {
     return <NotFound redirectUrl={`/${locale}/${type}`} />;
   }
@@ -97,7 +113,7 @@ export default async function ContentPage({ params }: Props) {
         description={pageDescription}
         canonical={canonicalUrl}
       />
-      <Header {...headerConfig} currentLocale={locale} />
+      <Header {...headerConfig} currentLocale={locale} currentType={`${locale}/${type}`}/>
       <div className="flex flex-grow">
         <Navigation key={type} locale={locale} items={navigationItems} />
         <div className="flex-1 flex py-4 w-full">
@@ -116,17 +132,19 @@ export default async function ContentPage({ params }: Props) {
               </div>
               <MainTitle>{t(post.title)}</MainTitle>
               <SubTitle>{t(post.description)}</SubTitle>
-              {post.blocks.map((block) => (
-                block.content !== post.title && (
+              <div className="mt-6">
+                {post.blocks.map((block) => (
+                  block.content !== post.title && (
                   <BlockRenderer 
                     key={block.id} 
                     block={{
                       ...block,
                       content: block.content
-                    }} 
-                  />
-                )
-              ))}
+                      }} 
+                    />
+                  )
+                ))}
+              </div>
               <PageNavigation prev={prev} next={next} locale={locale} />
             </div>
           </PostContainer>
