@@ -24,18 +24,19 @@ jobs:
           cache-dependency-path: package-lock.json
           
       - name: Install dependencies
-        working-directory: ./
         run: npm ci
-        
+
       - name: Build
-        working-directory: ./
+        env:
+          NEXT_PUBLIC_BASE_PATH: ''
         run: |
           npm run build
+          npx @cloudflare/next-on-pages@1
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: .next/static
+          path: ./.vercel/output/static
 
   deploy:
     needs: build
