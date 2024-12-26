@@ -1,0 +1,91 @@
+{
+  "title": "Aperçu de l'éditeur",
+  "description": "Un aperçu complet de l'éditeur basé sur les blocs d'AkiraDocs",
+  "author": "Akira Team",
+  "publishDate": "2024-11-26T00:00:00.000Z",
+  "modifiedDate": "2024-11-26T00:00:00.000Z",
+  "category": "Editor",
+  "keywords": [
+    "Éditeur",
+    "Basé sur les blocs",
+    "Aperçu",
+    "Introduction"
+  ],
+  "blocks": [
+    {
+      "id": "1",
+      "type": "paragraph",
+      "content": "AkiraDocs dispose d'un éditeur moderne basé sur les blocs qui combine la simplicité de l'édition visuelle avec la puissance de Markdown. Conçu pour les développeurs et les créateurs de contenu, il offre une façon flexible et intuitive de créer et gérer la documentation."
+    },
+    {
+      "id": "2",
+      "type": "heading",
+      "content": "Fonctionnalités principales",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "3",
+      "type": "list",
+      "content": [
+        "Édition basée sur les blocs avec support glisser-déposer",
+        "Formatage de texte riche avec support Markdown",
+        "Fonctionnalités de collaboration en temps réel",
+        "Système de blocs extensible",
+        "Contrôle de version intégré",
+        "Assistance de contenu alimentée par l'IA"
+      ],
+      "metadata": {
+        "listType": "unordered"
+      }
+    },
+    {
+      "id": "4",
+      "type": "heading",
+      "content": "Architecture système",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "5",
+      "type": "paragraph",
+      "content": "L'éditeur est construit sur une pile moderne utilisant React et Next.js, avec une architecture modulaire qui sépare les responsabilités entre la gestion des blocs, le traitement du contenu et les composants d'interface utilisateur."
+    },
+    {
+      "id": "6",
+      "type": "heading",
+      "content": "Composants principaux",
+      "metadata": {
+        "level": 3
+      }
+    },
+    {
+      "id": "7",
+      "type": "list",
+      "content": [
+        "<strong>Gestionnaire de blocs</strong> : Gère la création, la suppression et l'organisation des blocs",
+        "<strong>Éditeur de contenu</strong> : Gère la saisie et le formatage du texte",
+        "<strong>Système de fichiers</strong> : Gère la persistance du contenu et la gestion des fichiers",
+        "<strong>Composants UI</strong> : Fournit les éléments d'interface utilisateur"
+      ],
+      "metadata": {
+        "listType": "unordered"
+      }
+    },
+    {
+      "id": "8",
+      "type": "heading",
+      "content": "Premiers pas",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "9",
+      "type": "paragraph",
+      "content": "Pour utiliser l'éditeur, assurez-vous d'avoir Node.js 18+ installé. L'éditeur est inclus par défaut dans les installations d'AkiraDocs. Pour des instructions détaillées sur la configuration, consultez le guide de démarrage."
+    }
+  ]
+}

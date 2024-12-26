@@ -1,0 +1,137 @@
+{
+  "title": "AkiraDocs Features",
+  "description": "",
+  "author": "Akira Team",
+  "publishDate": "2024-11-26T00:00:00.000Z",
+  "modifiedDate": "2024-11-26T00:00:00.000Z",
+  "category": "Getting Started",
+  "keywords": [
+    "Akira Docs",
+    "Documentation",
+    "AI"
+  ],
+  "blocks": [
+    {
+      "id": "1",
+      "type": "paragraph",
+      "content": "A comprehensive overview of AkiraDocs' core features and capabilities."
+    },
+    {
+      "id": "2",
+      "type": "heading",
+      "content": "Content Creation & Management",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "3",
+      "type": "list",
+      "content": [
+        "<strong>Notion-like Editor</strong>: Intuitive block-based interface with real-time preview",
+        "<strong>Markdown Support</strong>: Native Markdown and MDX compatibility",
+        "<strong>Custom Components</strong>: Create and reuse your own content blocks"
+      ],
+      "metadata": {
+        "listType": "unordered"
+      }
+    },
+    {
+      "id": "4",
+      "type": "heading",
+      "content": "Internationalization & Translation",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "5",
+      "type": "list",
+      "content": [
+        "<strong>Multi-Language Support</strong>: Maintain documentation in multiple languages",
+        "<strong>AI-Powered Translation</strong>: Automated, context-aware content translation",
+        "<strong>Translation Management</strong>: Built-in tools for managing localized content"
+      ],
+      "metadata": {
+        "listType": "unordered"
+      }
+    },
+    {
+      "id": "6",
+      "type": "heading",
+      "content": "Search & Discovery",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "7",
+      "type": "list",
+      "content": [
+        "<strong>AI-Powered Search</strong>: Natural language question answering with context awareness",
+        "<strong>SEO Optimization</strong>: Automated SEO tools and optimizations",
+        "<strong>Smart Indexing</strong>: Real-time search index updates"
+      ],
+      "metadata": {
+        "listType": "unordered"
+      }
+    },
+    {
+      "id": "8",
+      "type": "heading",
+      "content": "Build & Performance",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "9",
+      "type": "list",
+      "content": [
+        "<strong>Static Generation</strong>: Optimized build process with asset optimization",
+        "<strong>Developer Experience</strong>: Fast refresh and comprehensive debugging tools",
+        "<strong>Performance Focus</strong>: Built-in best practices for speed and efficiency"
+      ],
+      "metadata": {
+        "listType": "unordered"
+      }
+    },
+    {
+      "id": "10",
+      "type": "heading",
+      "content": "Enterprise Features (Coming Soon)",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "11",
+      "type": "list",
+      "content": [
+        "<strong>Security & Compliance</strong>: SSO, RBAC, and audit logging",
+        "<strong>Analytics & Insights</strong>: Usage tracking and documentation metrics",
+        "<strong>Team Collaboration</strong>: Enterprise-grade collaboration tools"
+      ],
+      "metadata": {
+        "listType": "unordered"
+      }
+    },
+    {
+      "id": "12",
+      "type": "heading",
+      "content": "Migration Support (Coming Soon)",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "13",
+      "type": "code",
+      "content": "# Supported platforms for easy migration\n✓ Nextra\n✓ GitBook\n✓ Docusaurus\n✓ ReadTheDocs",
+      "metadata": {
+        "language": "bash",
+        "showLineNumbers": true
+      }
+    }
+  ]
+}

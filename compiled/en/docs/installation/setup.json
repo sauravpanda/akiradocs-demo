@@ -1,0 +1,261 @@
+{
+  "title": "Detailed Installation Guide",
+  "description": "",
+  "author": "Akira Team",
+  "publishDate": "2024-11-26T00:00:00.000Z",
+  "modifiedDate": "2024-11-26T00:00:00.000Z",
+  "category": "Installation",
+  "keywords": [
+    "Installation",
+    "Setup",
+    "Deployment"
+  ],
+  "blocks": [
+    {
+      "id": "1",
+      "type": "paragraph",
+      "content": "Complete guide to installing AkiraDocs in different environments."
+    },
+    {
+      "id": "2",
+      "type": "heading",
+      "content": "Prerequisites",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "3",
+      "type": "paragraph",
+      "content": "Ensure your system meets the [requirements](../getting-started/requirements.md) before proceeding."
+    },
+    {
+      "id": "4",
+      "type": "heading",
+      "content": "Installation Methods",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "5",
+      "type": "heading",
+      "content": "1. Local Development Setup",
+      "metadata": {
+        "level": 3
+      }
+    },
+    {
+      "id": "6",
+      "type": "paragraph",
+      "content": "1. <strong>Create New Project</strong>"
+    },
+    {
+      "id": "7",
+      "type": "code",
+      "content": "npx create-akiradocs@latest my-docs-site\ncd my-docs-site",
+      "metadata": {
+        "language": "bash",
+        "showLineNumbers": true
+      }
+    },
+    {
+      "id": "8",
+      "type": "paragraph",
+      "content": "2. <strong>Install Dependencies</strong>\nDependencies are automatically installed during project creation. If you need to reinstall:"
+    },
+    {
+      "id": "9",
+      "type": "code",
+      "content": "npm install",
+      "metadata": {
+        "language": "bash",
+        "showLineNumbers": true
+      }
+    },
+    {
+      "id": "10",
+      "type": "paragraph",
+      "content": "3. <strong>Create Environment File</strong>\nThe environment file is created automatically. You can modify it at `.env.local`"
+    },
+    {
+      "id": "11",
+      "type": "paragraph",
+      "content": "4. <strong>Start Development Server</strong>"
+    },
+    {
+      "id": "12",
+      "type": "code",
+      "content": "npm run dev",
+      "metadata": {
+        "language": "bash",
+        "showLineNumbers": true
+      }
+    },
+    {
+      "id": "13",
+      "type": "paragraph",
+      "content": "5. <strong>Update AkiraDocs</strong>\nTo update an existing installation to the latest version:"
+    },
+    {
+      "id": "14",
+      "type": "code",
+      "content": "npx create-akiradocs@latest update",
+      "metadata": {
+        "language": "bash",
+        "showLineNumbers": true
+      }
+    },
+    {
+      "id": "15",
+      "type": "heading",
+      "content": "3. Cloud Platform Deployment",
+      "metadata": {
+        "level": 3
+      }
+    },
+    {
+      "id": "16",
+      "type": "heading",
+      "content": "Vercel",
+      "metadata": {
+        "level": 4
+      }
+    },
+    {
+      "id": "17",
+      "type": "paragraph",
+      "content": "1. Fork the repository\n2. Connect to Vercel\n3. Configure environment variables\n4. Deploy"
+    },
+    {
+      "id": "18",
+      "type": "heading",
+      "content": "Other Platforms",
+      "metadata": {
+        "level": 4
+      }
+    },
+    {
+      "id": "19",
+      "type": "list",
+      "content": [
+        "AWS Amplify (Coming Soon)",
+        "Netlify (Coming Soon)",
+        "Digital Ocean (Coming Soon)",
+        "Custom server (Coming Soon)"
+      ],
+      "metadata": {
+        "listType": "unordered"
+      }
+    },
+    {
+      "id": "20",
+      "type": "heading",
+      "content": "Post-Installation Steps",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "21",
+      "type": "paragraph",
+      "content": "1. <strong>Verify Installation</strong>"
+    },
+    {
+      "id": "22",
+      "type": "code",
+      "content": "npm run build\nnpm run start",
+      "metadata": {
+        "language": "bash",
+        "showLineNumbers": true
+      }
+    },
+    {
+      "id": "23",
+      "type": "paragraph",
+      "content": "2. <strong>Configure Git Integration</strong>"
+    },
+    {
+      "id": "24",
+      "type": "code",
+      "content": "git remote add origin your-repository-url",
+      "metadata": {
+        "language": "bash",
+        "showLineNumbers": true
+      }
+    },
+    {
+      "id": "25",
+      "type": "paragraph",
+      "content": "3. <strong>Setup Content Directory</strong>"
+    },
+    {
+      "id": "26",
+      "type": "code",
+      "content": "mkdir -p docs/_contents/en",
+      "metadata": {
+        "language": "bash",
+        "showLineNumbers": true
+      }
+    },
+    {
+      "id": "27",
+      "type": "heading",
+      "content": "Environment-Specific Configurations",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "28",
+      "type": "heading",
+      "content": "Development",
+      "metadata": {
+        "level": 3
+      }
+    },
+    {
+      "id": "29",
+      "type": "code",
+      "content": "NODE_ENV=development\nDEBUG=true",
+      "metadata": {
+        "language": "env",
+        "showLineNumbers": true
+      }
+    },
+    {
+      "id": "30",
+      "type": "heading",
+      "content": "Production",
+      "metadata": {
+        "level": 3
+      }
+    },
+    {
+      "id": "31",
+      "type": "code",
+      "content": "NODE_ENV=production\nDEBUG=false",
+      "metadata": {
+        "language": "env",
+        "showLineNumbers": true
+      }
+    },
+    {
+      "id": "32",
+      "type": "heading",
+      "content": "Testing",
+      "metadata": {
+        "level": 3
+      }
+    },
+    {
+      "id": "33",
+      "type": "code",
+      "content": "NODE_ENV=test\nTEST_MODE=true",
+      "metadata": {
+        "language": "env",
+        "showLineNumbers": true
+      }
+    }
+  ]
+}

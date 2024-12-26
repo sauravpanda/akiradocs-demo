@@ -7,9 +7,137 @@
   "gettingStarted": {
     "title": "Getting-started",
     "items": {
+      "requirements": {
+        "title": "Configuration Requise",
+        "path": "/docs/getting-started/requirements"
+      },
       "quickstart": {
-        "title": "Voici la traduction en français, en conservant la mise en forme d'origine :\n\nGuide de démarrage rapide",
+        "title": "Guide de démarrage rapide",
         "path": "/docs/getting-started/quickstart"
+      },
+      "features": {
+        "title": "Fonctionnalités d'AkiraDocs",
+        "path": "/docs/getting-started/features"
+      }
+    }
+  },
+  "installation": {
+    "title": "Installation",
+    "items": {
+      "setup": {
+        "title": "Guide d'installation détaillé",
+        "path": "/docs/installation/setup"
+      },
+      "configuration": {
+        "title": "Guide de configuration",
+        "path": "/docs/installation/configuration"
+      },
+      "troubleshooting": {
+        "title": "Guide de dépannage",
+        "path": "/docs/installation/troubleshooting"
+      }
+    }
+  },
+  "contentManagement": {
+    "title": "Content-management",
+    "items": {
+      "creatingPages": {
+        "title": "Créer et organiser des pages",
+        "path": "/docs/content-management/creating-pages"
+      }
+    }
+  },
+  "editor": {
+    "title": "Editor",
+    "items": {
+      "overview": {
+        "title": "Aperçu de l'éditeur",
+        "path": "/docs/editor/overview"
+      },
+      "getting-started": {
+        "title": "Premiers pas",
+        "path": "/docs/editor/getting-started"
+      },
+      "blocks": {
+        "title": "Types de blocs",
+        "path": "/docs/editor/blocks"
+      },
+      "features": {
+        "title": "Fonctionnalités",
+        "path": "/docs/editor/features"
+      },
+      "ai-features": {
+        "title": "Fonctionnalités d'IA",
+        "path": "/docs/editor/ai-features"
+      },
+      "gettingStarted": {
+        "title": "Premiers pas avec l'éditeur",
+        "path": "/docs/editor/getting-started"
+      },
+      "aiFeatures": {
+        "title": "Fonctionnalités d'IA",
+        "path": "/docs/editor/ai-features"
+      }
+    }
+  },
+  "internationalization": {
+    "title": "Internationalization",
+    "items": {
+      "setup": {
+        "title": "Configurer l'internationalisation",
+        "path": "/docs/internationalization/setup"
+      },
+      "managingTranslation": {
+        "title": "Gestion des traductions",
+        "path": "/docs/internationalization/managing-translation"
+      },
+      "aiTranslation": {
+        "title": "Traduction alimentée par l'IA",
+        "path": "/docs/internationalization/ai-translation"
+      }
+    }
+  },
+  "seoAndPerformance": {
+    "title": "Seo-and-performance",
+    "items": {
+      "sitemapGeneration": {
+        "title": "Génération automatique de plan du site",
+        "path": "/docs/seo-and-performance/sitemap-generation"
+      },
+      "robotTxt": {
+        "title": "Configuration robots.txt",
+        "path": "/docs/seo-and-performance/robot-txt"
+      }
+    }
+  },
+  "apiReference": {
+    "title": "Api-reference",
+    "items": {
+      "usageGuide": {
+        "title": "Guide de documentation de l'API",
+        "path": "/docs/api-reference/usage-guide"
+      }
+    }
+  },
+  "guides": {
+    "title": "Guides",
+    "items": {
+      "analytics": {
+        "title": "Intégration des analyses",
+        "path": "/docs/guides/analytics"
+      }
+    }
+  },
+  "contributing": {
+    "title": "Contributing",
+    "items": {
+      "howToContribute": {
+        "title": "Contribuer à AkiraDocs",
+        "path": "/docs/contributing/how-to-contribute"
+      },
+      "codeOfConduct": {
+        "title": "Code de conduite",
+        "path": "/docs/contributing/code-of-conduct"
       }
     }
   }

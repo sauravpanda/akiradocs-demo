@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-      "title": "Generated API",
+      "title": "Sample API docs",
       "version": "1.0.0"
     },
     "paths": {

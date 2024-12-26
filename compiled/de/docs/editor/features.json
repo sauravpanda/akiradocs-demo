@@ -1,0 +1,63 @@
+{
+  "title": "Editor-Funktionen",
+  "description": "Detaillierte Übersicht über die Funktionen und Möglichkeiten des AkiraDocs-Editors",
+  "author": "Akira Team",
+  "publishDate": "2024-11-26T00:00:00.000Z",
+  "modifiedDate": "2024-11-26T00:00:00.000Z",
+  "category": "Editor",
+  "keywords": [
+    "Funktionen",
+    "Fähigkeiten",
+    "Editor-Funktionen",
+    "Werkzeuge"
+  ],
+  "blocks": [
+    {
+      "id": "1",
+      "type": "heading",
+      "content": "Drag and Drop",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "2",
+      "type": "paragraph",
+      "content": "Der Editor verfügt über ein leistungsstarkes Drag-and-Drop-System, das von dnd-kit unterstützt wird und eine intuitive Neuanordnung und Organisation von Blöcken ermöglicht. Klicken und ziehen Sie einfach einen beliebigen Block, um ihn innerhalb Ihres Dokuments neu zu positionieren."
+    },
+    {
+      "id": "3",
+      "type": "heading",
+      "content": "Dateiverwaltung",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "4",
+      "type": "list",
+      "content": [
+        "Automatische Dateispeicherung und Versionierung",
+        "Bildoptimierung und -verwaltung",
+        "Datei-Upload-Unterstützung für verschiedene Medientypen",
+        "Integrierter Dateibrowser und Explorer"
+      ],
+      "metadata": {
+        "listType": "unordered"
+      }
+    },
+    {
+      "id": "5",
+      "type": "heading",
+      "content": "Echtzeit-Zusammenarbeit",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "6",
+      "type": "paragraph",
+      "content": "Mehrere Benutzer können gleichzeitig am selben Dokument arbeiten, mit Echtzeit-Updates und Konfliktlösung. Änderungen werden automatisch über alle verbundenen Clients synchronisiert."
+    }
+  ]
+}

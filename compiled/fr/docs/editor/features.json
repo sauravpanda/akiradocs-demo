@@ -1,0 +1,63 @@
+{
+  "title": "Fonctionnalités de l'éditeur",
+  "description": "Aperçu détaillé des capacités et fonctionnalités de l'éditeur AkiraDocs",
+  "author": "Akira Team",
+  "publishDate": "2024-11-26T00:00:00.000Z",
+  "modifiedDate": "2024-11-26T00:00:00.000Z",
+  "category": "Editor",
+  "keywords": [
+    "Fonctionnalités",
+    "Capacités",
+    "Fonctions de l'éditeur",
+    "Outils"
+  ],
+  "blocks": [
+    {
+      "id": "1",
+      "type": "heading",
+      "content": "Glisser-déposer",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "2",
+      "type": "paragraph",
+      "content": "L'éditeur dispose d'un puissant système de glisser-déposer propulsé par dnd-kit, permettant une réorganisation et une organisation intuitive des blocs. Il suffit de cliquer et de faire glisser n'importe quel bloc pour le repositionner dans votre document."
+    },
+    {
+      "id": "3",
+      "type": "heading",
+      "content": "Gestion des fichiers",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "4",
+      "type": "list",
+      "content": [
+        "Sauvegarde automatique des fichiers et versionnage",
+        "Optimisation et gestion des images",
+        "Support du téléchargement de fichiers pour divers types de médias",
+        "Explorateur de fichiers intégré"
+      ],
+      "metadata": {
+        "listType": "unordered"
+      }
+    },
+    {
+      "id": "5",
+      "type": "heading",
+      "content": "Collaboration en temps réel",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "6",
+      "type": "paragraph",
+      "content": "Plusieurs utilisateurs peuvent travailler simultanément sur le même document, avec des mises à jour en temps réel et la résolution des conflits. Les modifications sont automatiquement synchronisées sur tous les clients connectés."
+    }
+  ]
+}

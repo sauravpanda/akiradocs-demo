@@ -2,5 +2,13 @@
   "quickstart": {
     "title": "Quickstart Guide",
     "path": "/en/docs/getting-started/quickstart"
+  },
+  "requirements": {
+    "title": "Requirements",
+    "path": "/en/docs/getting-started/requirements"
+  },
+  "features": {
+    "title": "Features",
+    "path": "/en/docs/getting-started/features"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "title": "Key Features",
+  "title": "Introduction to AkiraDocs",
   "description": "",
   "author": "Akira Team",
   "publishDate": "2024-11-10T00:00:00.000Z",
@@ -14,22 +14,128 @@
     {
       "id": "1",
       "type": "paragraph",
-      "content": "Learn about Akira Docs and its core features"
+      "content": "AkiraDocs is a next-generation documentation platform that combines the power of AI with an intuitive content management system. It's designed to transform your documentation workflow from days to minutes."
     },
     {
       "id": "2",
-      "type": "paragraph",
-      "content": "Akira Docs is a modern documentation platform that combines the power of AI with an intuitive block-based content system. This guide will help you understand the core concepts and features."
+      "type": "heading",
+      "content": "Why AkiraDocs?",
+      "metadata": {
+        "level": 2
+      }
     },
     {
       "id": "3",
+      "type": "paragraph",
+      "content": "Documentation is often a challenge for teams:"
+    },
+    {
+      "id": "4",
       "type": "list",
       "content": [
-        "AI-powered search",
-        "Block-based content editing",
-        "Responsive design",
-        "Customizable themes",
-        "Markdown support"
+        "Developers want to keep using Markdown and Git",
+        "Content teams need user-friendly editors",
+        "Technical writers struggle with version management",
+        "Product managers deal with out-of-sync documentation",
+        "Enterprise leaders need better analytics"
+      ],
+      "metadata": {
+        "listType": "unordered"
+      }
+    },
+    {
+      "id": "5",
+      "type": "paragraph",
+      "content": "AkiraDocs solves these challenges by providing a unified platform that brings everyone's workflow together."
+    },
+    {
+      "id": "6",
+      "type": "heading",
+      "content": "Core Benefits",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "7",
+      "type": "list",
+      "content": [
+        "<strong>Universal Workflow</strong>: Developers keep their Markdown/Git workflow while content teams get a block-based WYSIWYG editor",
+        "<strong>AI-Powered</strong>: Automatic content updates, translations, and optimizations",
+        "<strong>SEO-Optimized</strong>: Documentation that ranks well by default",
+        "<strong>Multi-Language Support</strong>: AI-powered translations with context awareness",
+        "<strong>Enterprise-Ready</strong>: SSO/SAML integration, audit logs, and custom deployment options"
+      ],
+      "metadata": {
+        "listType": "unordered"
+      }
+    },
+    {
+      "id": "8",
+      "type": "heading",
+      "content": "Who Is It For?",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "9",
+      "type": "heading",
+      "content": "Developer Documentation",
+      "metadata": {
+        "level": 3
+      }
+    },
+    {
+      "id": "10",
+      "type": "list",
+      "content": [
+        "API documentation",
+        "SDK guides",
+        "Technical specifications",
+        "Implementation guides"
+      ],
+      "metadata": {
+        "listType": "unordered"
+      }
+    },
+    {
+      "id": "11",
+      "type": "heading",
+      "content": "Product Documentation",
+      "metadata": {
+        "level": 3
+      }
+    },
+    {
+      "id": "12",
+      "type": "list",
+      "content": [
+        "User guides",
+        "Feature documentation",
+        "Release notes",
+        "FAQs"
+      ],
+      "metadata": {
+        "listType": "unordered"
+      }
+    },
+    {
+      "id": "13",
+      "type": "heading",
+      "content": "Enterprise Documentation",
+      "metadata": {
+        "level": 3
+      }
+    },
+    {
+      "id": "14",
+      "type": "list",
+      "content": [
+        "Internal knowledge bases",
+        "Process documentation",
+        "Compliance documentation",
+        "Training materials"
       ],
       "metadata": {
         "listType": "unordered"

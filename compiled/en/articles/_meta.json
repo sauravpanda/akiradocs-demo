@@ -4,12 +4,12 @@
     "title": "Welcome to Akira Doc",
     "path": "/articles/welcome"
   },
-  "template": {
-    "title": "Test Blog Post",
-    "path": "/articles/template"
-  },
   "ai_integration": {
     "title": "Ai Integration",
     "path": "/articles/ai_integration"
+  },
+  "importance_of_documentation": {
+    "title": "The Critical Importance of Documentation in Modern Software Development",
+    "path": "/articles/importance_of_documentation"
   }
 }

@@ -9,14 +9,45 @@ keywords:
   - AI
 ---
 
-Learn about Akira Docs and its core features
+# Introduction to AkiraDocs
 
-Akira Docs is a modern documentation platform that combines the power of AI with an intuitive block-based content system. This guide will help you understand the core concepts and features.
+AkiraDocs is a next-generation documentation platform that combines the power of AI with an intuitive content management system. It's designed to transform your documentation workflow from days to minutes.
 
-## Key Features
+## Why AkiraDocs?
 
-- AI-powered search
-- Block-based content editing
-- Responsive design
-- Customizable themes
-- Markdown support
+Documentation is often a challenge for teams:
+- Developers want to keep using Markdown and Git
+- Content teams need user-friendly editors
+- Technical writers struggle with version management
+- Product managers deal with out-of-sync documentation
+- Enterprise leaders need better analytics
+
+AkiraDocs solves these challenges by providing a unified platform that brings everyone's workflow together.
+
+## Core Benefits
+
+- **Universal Workflow**: Developers keep their Markdown/Git workflow while content teams get a block-based WYSIWYG editor
+- **AI-Powered**: Automatic content updates, translations, and optimizations
+- **SEO-Optimized**: Documentation that ranks well by default
+- **Multi-Language Support**: AI-powered translations with context awareness
+- **Enterprise-Ready**: SSO/SAML integration, audit logs, and custom deployment options
+
+## Who Is It For?
+
+### Developer Documentation
+- API documentation
+- SDK guides
+- Technical specifications
+- Implementation guides
+
+### Product Documentation
+- User guides
+- Feature documentation
+- Release notes
+- FAQs
+
+### Enterprise Documentation
+- Internal knowledge bases
+- Process documentation
+- Compliance documentation
+- Training materials
