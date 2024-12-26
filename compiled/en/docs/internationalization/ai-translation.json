@@ -1,0 +1,91 @@
+{
+  "title": "AI-Powered Translation",
+  "description": "",
+  "author": "Akira Team",
+  "publishDate": "2024-11-26T00:00:00.000Z",
+  "modifiedDate": "2024-11-26T00:00:00.000Z",
+  "category": "Internationalization",
+  "keywords": [
+    "AI Translation",
+    "Automation",
+    "Language Processing"
+  ],
+  "blocks": [
+    {
+      "id": "1",
+      "type": "paragraph",
+      "content": "Guide to using AkiraDocs' AI translation capabilities."
+    },
+    {
+      "id": "2",
+      "type": "heading",
+      "content": "Setup",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "3",
+      "type": "heading",
+      "content": "Configuration",
+      "metadata": {
+        "level": 3
+      }
+    },
+    {
+      "id": "4",
+      "type": "code",
+      "content": "{\n  \"translation\": {\n    \"auto_translate\": true,\n    \"provider\": \"anthropic\",\n    \"model\": \"claude-3-sonnet-20240229\",\n    \"targetLanguages\": [\"es\", \"fr\", \"de\"],\n    \"excludedPaths\": [\"_meta.json\"]\n  }\n}",
+      "metadata": {
+        "language": "json",
+        "showLineNumbers": true
+      }
+    },
+    {
+      "id": "5",
+      "type": "heading",
+      "content": "API Setup",
+      "metadata": {
+        "level": 3
+      }
+    },
+    {
+      "id": "6",
+      "type": "code",
+      "content": "ANTHROPIC_API_KEY=your_api_key",
+      "metadata": {
+        "language": "env",
+        "showLineNumbers": true
+      }
+    },
+    {
+      "id": "7",
+      "type": "heading",
+      "content": "Features",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "8",
+      "type": "heading",
+      "content": "Automatic Translation",
+      "metadata": {
+        "level": 3
+      }
+    },
+    {
+      "id": "9",
+      "type": "list",
+      "content": [
+        "Content translation during build",
+        "Context-aware translations",
+        "Technical term preservation",
+        "Format maintenance"
+      ],
+      "metadata": {
+        "listType": "unordered"
+      }
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "title": "Características del editor",
+  "description": "Descripción detallada de las capacidades y características del editor AkiraDocs",
+  "author": "Akira Team",
+  "publishDate": "2024-11-26T00:00:00.000Z",
+  "modifiedDate": "2024-11-26T00:00:00.000Z",
+  "category": "Editor",
+  "keywords": [
+    "Características",
+    "Capacidades",
+    "Funciones del editor",
+    "Herramientas"
+  ],
+  "blocks": [
+    {
+      "id": "1",
+      "type": "heading",
+      "content": "Arrastrar y soltar",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "2",
+      "type": "paragraph",
+      "content": "El editor cuenta con un potente sistema de arrastrar y soltar impulsado por dnd-kit, permitiendo la reordenación y organización intuitiva de bloques. Simplemente haga clic y arrastre cualquier bloque para reposicionarlo dentro de su documento."
+    },
+    {
+      "id": "3",
+      "type": "heading",
+      "content": "Gestión de archivos",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "4",
+      "type": "list",
+      "content": [
+        "Guardado automático de archivos y control de versiones",
+        "Optimización y gestión de imágenes",
+        "Soporte para carga de archivos de diversos tipos de medios",
+        "Explorador de archivos integrado"
+      ],
+      "metadata": {
+        "listType": "unordered"
+      }
+    },
+    {
+      "id": "5",
+      "type": "heading",
+      "content": "Colaboración en tiempo real",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "6",
+      "type": "paragraph",
+      "content": "Múltiples usuarios pueden trabajar en el mismo documento simultáneamente, con actualizaciones en tiempo real y resolución de conflictos. Los cambios se sincronizan automáticamente en todos los clientes conectados."
+    }
+  ]
+}

@@ -10,19 +10,69 @@ keywords:
   - AI
 ---
 
-Get up and running with Akira Docs in minutes
 
-Follow these steps to start using Akira Docs for your documentation needs.
+# Quick Start Guide
 
+Get up and running with AkiraDocs in minutes.
+
+## Quick Deploy
+
+### Option 1: Deploy with Vercel
+The fastest way to get started is using Vercel:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FCloud-Code-AI%2Fakiradocs-template)
+
+### Option 2: Using CLI
+Create a new project using our CLI:
+
+```bash
+npx create-akiradocs@latest my-docs
 ```
-bash
+
+## Basic Setup Steps
+
+1. **Clone the Repository** (if not using Quick Deploy)
+```bash
 git clone https://github.com/your-org/akira-docs-template
 cd akira-docs-template
-npm install
-npm run dev
 ```
 
-:::warning Prerequisites
-Make sure you have Node.js 16 or higher installed on your system.
-:::
+2. **Install Dependencies**
+```bash
+npm install
+# or
+yarn install
+```
 
+3. **Start Development Server**
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+4. Open `http://localhost:3000` in your browser
+
+## Initial Configuration
+
+1. **Update Site Configuration**
+Edit `akiradocs.config.json`:
+```json
+{
+  "site": {
+    "title": "Your Docs",
+    "description": "Your documentation description"
+  }
+}
+```
+
+2. **Configure Translation** (Optional)
+```json
+{
+  "translation": {
+    "auto_translate": true,
+    "provider": "anthropic",
+    "targetLanguages": ["es", "fr", "de"]
+  }
+}
+```

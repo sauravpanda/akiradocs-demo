@@ -1,0 +1,91 @@
+{
+  "title": "Überblick über den Editor",
+  "description": "Ein umfassender Überblick über den blockbasierten Editor von AkiraDocs",
+  "author": "Akira Team",
+  "publishDate": "2024-11-26T00:00:00.000Z",
+  "modifiedDate": "2024-11-26T00:00:00.000Z",
+  "category": "Editor",
+  "keywords": [
+    "Editor",
+    "Blockbasiert",
+    "Überblick",
+    "Einführung"
+  ],
+  "blocks": [
+    {
+      "id": "1",
+      "type": "paragraph",
+      "content": "AkiraDocs verfügt über einen modernen, blockbasierten Editor, der die Einfachheit der visuellen Bearbeitung mit der Leistungsfähigkeit von Markdown kombiniert. Er wurde sowohl für Entwickler als auch für Content-Ersteller entwickelt und bietet eine flexible und intuitive Möglichkeit, Dokumentation zu erstellen und zu verwalten."
+    },
+    {
+      "id": "2",
+      "type": "heading",
+      "content": "Hauptfunktionen",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "3",
+      "type": "list",
+      "content": [
+        "Blockbasierte Bearbeitung mit Drag-and-Drop-Unterstützung",
+        "Umfangreiche Textformatierung mit Markdown-Unterstützung",
+        "Echtzeit-Kollaborationsfunktionen",
+        "Erweiterbares Block-System",
+        "Integrierte Versionskontrolle",
+        "KI-gestützte Inhaltsunterstützung"
+      ],
+      "metadata": {
+        "listType": "unordered"
+      }
+    },
+    {
+      "id": "4",
+      "type": "heading",
+      "content": "Systemarchitektur",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "5",
+      "type": "paragraph",
+      "content": "Der Editor basiert auf einem modernen Stack mit React und Next.js und verfügt über eine modulare Architektur, die die Aufgaben zwischen Blockverwaltung, Inhaltsverarbeitung und UI-Komponenten trennt."
+    },
+    {
+      "id": "6",
+      "type": "heading",
+      "content": "Kernkomponenten",
+      "metadata": {
+        "level": 3
+      }
+    },
+    {
+      "id": "7",
+      "type": "list",
+      "content": [
+        "<strong>Block-Manager</strong>: Verwaltet die Erstellung, Löschung und Anordnung von Blöcken",
+        "<strong>Content-Editor</strong>: Verwaltet Texteingabe und Formatierung",
+        "<strong>Dateisystem</strong>: Behandelt die Persistenz von Inhalten und Dateiverwaltung",
+        "<strong>UI-Komponenten</strong>: Stellt die Benutzeroberflächen-Elemente bereit"
+      ],
+      "metadata": {
+        "listType": "unordered"
+      }
+    },
+    {
+      "id": "8",
+      "type": "heading",
+      "content": "Erste Schritte",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "9",
+      "type": "paragraph",
+      "content": "Um den Editor zu verwenden, stellen Sie sicher, dass Node.js 18+ installiert ist. Der Editor ist standardmäßig in AkiraDocs-Installationen enthalten. Detaillierte Einrichtungsanweisungen finden Sie in der Anleitung für erste Schritte."
+    }
+  ]
+}

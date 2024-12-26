@@ -14,26 +14,146 @@
     {
       "id": "1",
       "type": "paragraph",
-      "content": "Get up and running with Akira Docs in minutes"
+      "content": "Get up and running with AkiraDocs in minutes."
     },
     {
       "id": "2",
-      "type": "paragraph",
-      "content": "Follow these steps to start using Akira Docs for your documentation needs."
+      "type": "heading",
+      "content": "Quick Deploy",
+      "metadata": {
+        "level": 2
+      }
     },
     {
       "id": "3",
-      "type": "code",
-      "content": "bash\ngit clone https://github.com/your-org/akira-docs-template\ncd akira-docs-template\nnpm install\nnpm run dev",
+      "type": "heading",
+      "content": "Option 1: Deploy with Vercel",
       "metadata": {
-        "language": "plaintext",
-        "showLineNumbers": true
+        "level": 3
       }
     },
     {
       "id": "4",
       "type": "paragraph",
-      "content": ":::warning Prerequisites\nMake sure you have Node.js 16 or higher installed on your system.\n:::"
+      "content": "The fastest way to get started is using Vercel:"
+    },
+    {
+      "id": "5",
+      "type": "paragraph",
+      "content": "[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FCloud-Code-AI%2Fakiradocs-template)"
+    },
+    {
+      "id": "6",
+      "type": "heading",
+      "content": "Option 2: Using CLI",
+      "metadata": {
+        "level": 3
+      }
+    },
+    {
+      "id": "7",
+      "type": "paragraph",
+      "content": "Create a new project using our CLI:"
+    },
+    {
+      "id": "8",
+      "type": "code",
+      "content": "npx create-akiradocs@latest my-docs",
+      "metadata": {
+        "language": "bash",
+        "showLineNumbers": true
+      }
+    },
+    {
+      "id": "9",
+      "type": "heading",
+      "content": "Basic Setup Steps",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "10",
+      "type": "paragraph",
+      "content": "1. <strong>Clone the Repository</strong> (if not using Quick Deploy)"
+    },
+    {
+      "id": "11",
+      "type": "code",
+      "content": "git clone https://github.com/your-org/akira-docs-template\ncd akira-docs-template",
+      "metadata": {
+        "language": "bash",
+        "showLineNumbers": true
+      }
+    },
+    {
+      "id": "12",
+      "type": "paragraph",
+      "content": "2. <strong>Install Dependencies</strong>"
+    },
+    {
+      "id": "13",
+      "type": "code",
+      "content": "npm install\n# or\nyarn install",
+      "metadata": {
+        "language": "bash",
+        "showLineNumbers": true
+      }
+    },
+    {
+      "id": "14",
+      "type": "paragraph",
+      "content": "3. <strong>Start Development Server</strong>"
+    },
+    {
+      "id": "15",
+      "type": "code",
+      "content": "npm run dev\n# or\nyarn dev",
+      "metadata": {
+        "language": "bash",
+        "showLineNumbers": true
+      }
+    },
+    {
+      "id": "16",
+      "type": "paragraph",
+      "content": "4. Open `http://localhost:3000` in your browser"
+    },
+    {
+      "id": "17",
+      "type": "heading",
+      "content": "Initial Configuration",
+      "metadata": {
+        "level": 2
+      }
+    },
+    {
+      "id": "18",
+      "type": "paragraph",
+      "content": "1. <strong>Update Site Configuration</strong>\nEdit `akiradocs.config.json`:"
+    },
+    {
+      "id": "19",
+      "type": "code",
+      "content": "{\n  \"site\": {\n    \"title\": \"Your Docs\",\n    \"description\": \"Your documentation description\"\n  }\n}",
+      "metadata": {
+        "language": "json",
+        "showLineNumbers": true
+      }
+    },
+    {
+      "id": "20",
+      "type": "paragraph",
+      "content": "2. <strong>Configure Translation</strong> (Optional)"
+    },
+    {
+      "id": "21",
+      "type": "code",
+      "content": "{\n  \"translation\": {\n    \"auto_translate\": true,\n    \"provider\": \"anthropic\",\n    \"targetLanguages\": [\"es\", \"fr\", \"de\"]\n  }\n}",
+      "metadata": {
+        "language": "json",
+        "showLineNumbers": true
+      }
     }
   ]
 }
