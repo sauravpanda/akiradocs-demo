@@ -19,7 +19,7 @@ export async function getDbWorker() {
         from: "inline" as const,
         config: {
             serverMode: "full",
-            requestChunkSize: 4096,
+            requestChunkSize: 1024 * 1024,
             url: "/context/docs.db"
         }
     };

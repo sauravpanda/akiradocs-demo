@@ -1,0 +1,4 @@
+/context/docs.db
+  Accept-Ranges: bytes
+  Access-Control-Expose-Headers: Content-Length, Accept-Ranges, Content-Range
+  Access-Control-Allow-Headers: Range 
